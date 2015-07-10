@@ -6,8 +6,14 @@
 	function getUser(){
 		global $conn;
 		global $_GET;
-		$result = array('a' => 1);
-		echo json_encode($result);
+		if($rows = $conn->query("SELECT * FROM User;")) {
+			$row = $rows->fetch_all();
+			echo $row;
+			echo json_encode($row[0]);
+		}
+		else {
+			echo json_encode(array());
+		}
 	}
 	switch ($_SERVER['REQUEST_METHOD']) {
 
