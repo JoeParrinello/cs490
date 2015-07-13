@@ -7,7 +7,9 @@
 		global $conn;
 		global $_GET;
 		if($rows = $conn->query("SELECT * FROM User;")) {
-			$row = $rows->fetch_all();
+			echo "Hello\n";
+			$row = $rows->fetch_array();
+			echo "Hello1\n";
 			echo $row;
 			echo json_encode($row[0]);
 		}
