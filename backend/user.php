@@ -1,29 +1,61 @@
 <?php
-	
-	require_once "./dbconnect.php";
+
+require_once "./dbconnect.php";
 
 
-	function getUser(){
-		global $conn;
-		global $_GET;
-		if($rows = $conn->query("SELECT * FROM User;")) {
-			echo "Hello\n";
-			$row = $rows->fetch_array();
-			echo "Hello1\n";
-			echo $row;
-			echo json_encode($row[0]);
+function getUser(){
+	global $conn;
+	global $_GET;
+	if (isset($_GET["username"])) {
+		if ($rows = $conn->query("SELECT * FROM User WHERE username='".$_GET["username"]."';")) {
+			if ($row = $rows->fetch_assoc()){
+				echo json_encode($row);
+			} else {
+				echo "{}";
+			}
 		}
-		else {
-			echo json_encode(array());
+	} else {
+		$comma = 0;
+		if($rows = $conn->query("SELECT * FROM User;")) {
+			echo "[";
+			while ($row = $rows->fetch_assoc()) {
+				if ($comma > 0) {
+					echo ",";
+				}
+				$comma++;
+				echo json_encode($row);
+			}
+			echo "]";
 		}
 	}
-	switch ($_SERVER['REQUEST_METHOD']) {
+}
+
+function makeUser(){
+	global $conn;
+	global $_POST;
+	if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["role"])) {
+		$salt = "salt";
+		$hashpass = hash_pbkdf2("sha256",$_POST["password"],$salt,1000,20);
+		if($conn->query("INSERT INTO User (username, password, role) VALUES ('".$_POST['username']."', '".$hashpass."', '".$_POST['role']."')")===TRUE){
+			echo "Success!";
+		} else {
+			echo "Failure Inserting Value!";
+		}
+	} else {
+		echo "Error!";
+	}
+
+
+}
+
+switch ($_SERVER['REQUEST_METHOD']) {
 
 	case 'POST' :
-		break;
+	makeUser();
+	break;
 	case 'GET':
-		getUser();
-		break;
-	}
+	getUser();
+	break;
+}
 
 ?>
