@@ -12,12 +12,12 @@
 		</header>
 			<nav>
 				<strong>Navigation Menu</strong> <br>
-					<a href="index.html">Home</a> <br>
-					<a href="tutorial.html">Tutorials</a> <br>
-					<a href="about.html">About Testopia</a> <br>
-					<a href="contact.html">Contact Us</a> <br>
-					<a href="instructor/inshome.html">Instructor Demo</a> <br>
-					<a href="student/stuhome.html">Student Demo</a> <br>
+					<a href="index.php">Home</a> <br>
+					<a href="tutorial.php">Tutorials</a> <br>
+					<a href="about.php">About Testopia</a> <br>
+					<a href="contact.php">Contact Us</a> <br>
+					<a href="instructor/inshome.php">Instructor Demo</a> <br>
+					<a href="student/stuhome.php">Student Demo</a> <br>
 			</nav>
 			<section>
 				<strong>Welcome</strong>
