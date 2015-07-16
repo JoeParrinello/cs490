@@ -6,6 +6,7 @@ require_once "./dbconnect.php";
 function getUser(){
 	global $conn;
 	global $_GET;
+	header('Content-Type: application/json');
 	if (isset($_GET["username"])) {
 		if ($rows = $conn->query("SELECT * FROM User WHERE username='".$_GET["username"]."';")) {
 			if ($row = $rows->fetch_assoc()){
@@ -33,16 +34,17 @@ function getUser(){
 function makeUser(){
 	global $conn;
 	global $_POST;
+	header('Content-Type: application/json');
 	if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["role"])) {
 		$salt = "salt";
 		$hashpass = hash_pbkdf2("sha256",$_POST["password"],$salt,1000,20);
 		if($conn->query("INSERT INTO User (username, password, role) VALUES ('".$_POST['username']."', '".$hashpass."', '".$_POST['role']."')")===TRUE){
 			echo "Success!";
 		} else {
-			echo "Failure Inserting Value!";
+			echo '{"err":"Failure Inserting Value!"}';
 		}
 	} else {
-		echo "Error!";
+		echo '{"err":"Error!"}';
 	}
 
 
