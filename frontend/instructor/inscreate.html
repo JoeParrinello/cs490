@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Testopia | Add a Question (CS490) </title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/formselector.js"></script>
+
+</head>
+		<header>
+			<stong>Testopia | Add a Question (CS490) </stong>
+		</header>
+	<body>
+		<label for="show-menu" class="show-menu">Show Menu</label>
+		<input type="checkbox" id="show-menu" role="button">
+		<ul id="menu" align="center">
+					<li><a href="inshome.php">Home</a></li>
+					<li><a href="instests.php">Tests</a></li>
+					<li><a href="inscreate.php">Add Question</a></li>
+					<li><a href="insregstudents.php">Students</a></li>
+					<li><a href="instutorial.php">Tutorials</a></li>
+					<li><a href="insabout.php">About Testopia</a></li>	
+					<li><a href="inscontact.php">Contact Us</a> </li>
+		</ul>
+
+		<div id="form">
+			<?php
+			   if (isset($_POST['submit'])) {
+			     addquestion();
+			   }
+			   else {
+			?>
+				<strong>Login</strong>
+				<form action="inshome.php" method="POST" id="login_form">
+					<table>
+						<select>
+							<option value="" selected="selected"></option>
+							<option value="form_tf">True/False</option>
+							<option value="form_mc">Multiple Choice</option>
+							<option value="form_fb">Fill in the Blank</option>
+							<option value="form_sa">Short Answer</option>
+							</select>
+
+							<form name="form_tf" id="form_tf" style="display:none">
+							<input type="hidden" name="type" id="type" value="tf">
+							<tr>
+								<td>Enter True and False Question</td>
+						    	<td><input type="text" name="question" id="question" /></td>
+							</tr>
+
+							<tr>
+								<td>Select Correct Answer</td>
+						    	<td><input type="radio" name="correctans" id="correctans" value="True">True<br>
+									<input type="radio" name="correctans" id="correctans" value="False">False</td>
+							</tr>
+
+							<tr>
+								<td colspan="2"><input type='submit' name='submit' value='Add Question' /></td>
+							</tr>
+							</form>
+
+							<form name="form_mc" id="form_mc" style="display:none">
+
+							<tr>
+								<td colspan="2"><input type='submit' name='submit' value='Add Question' /></td>
+							</tr>
+							</form>
+						
+							<form name="form_fb" id="form_fb" style="display:none">
+							
+							<tr>
+								<td colspan="2"><input type='submit' name='submit' value='Add Question' /></td>
+							</tr>
+							</form>
+						
+							<form name="form_sa" id="form_fb" style="display:none">
+							
+							<tr>
+								<td colspan="2"><input type='submit' name='submit' value='Add Question' /></td>
+							</tr>
+							</form>
+				</form>
+						<?php 
+							}
+						 function addquestion(){
+						 		$question = $_POST['question'];
+								$type = $_POST['type'];
+								$correctans = $_POST['correctans'];
+								$otherans1 = $_POST['otherans1'];
+								$otherans2 = $_POST['otherans2'];
+								$otherans3 = $_POST['otherans3'];
+							include ('scripts/fecontroller.php');
+							?>
+						<strong>Login</strong>
+				<form action="inshome.php" method="POST" id="login_form">
+					<table>
+
+						<tr>
+							<td colspan="2"><input type='submit' name='submit' value='Add Question' /></td>
+						</tr>
+				</form>
+						<?php 
+						}
+						?>
+						</tr>
+					</table>
+				
+			</div>
+			<footer>
+				<p> System Developed by <em>Joseph Parrinello, Sadig Amini,</em> and <em>Oliver Hanna</em></p>
+			</footer>
+		
+</body>
+</html>
+
