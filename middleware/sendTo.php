@@ -24,6 +24,9 @@ $output = curl_exec($ch);
 curl_close($ch);
 return $output;
 }
-
+function isJson($string) {
+ json_decode($string);
+ return (json_last_error() == JSON_ERROR_NONE);
+}
 
 ?>
