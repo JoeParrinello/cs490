@@ -7,23 +7,23 @@ function makeQuestionAnswer(){
 	global $_POST;
 	header('Content-Type: application/json');
 	if (isset($_POST["questionId"])) {
-		if (isset($_POST["option"])) {
+		if (isset($_POST["choice"])) {
 			if(isset($_POST["text"])){
-				if ($_POST["option"]=="A" || $_POST["option"]=="B" || $_POST["option"]=="C" || $_POST["option"]=="D") {
-					if($conn->query("INSERT INTO ChoiceAnswer (questionId, option, text) VALUES (".$_POST['questionId'].", '".$_POST['option']."', '".$_POST['text']."')")===TRUE){
-						$row = $conn->query("SELECT * FROM ChoiceAnswer WHERE questionId=".$_POST['questionId']." AND option='".$_POST['option']."' AND text='".$_POST['text']."';");
+				if ($_POST["choice"]=="A" || $_POST["choice"]=="B" || $_POST["choice"]=="C" || $_POST["choice"]=="D") {
+					if($conn->query("INSERT INTO ChoiceAnswer (questionId, choice, text) VALUES (".$_POST['questionId'].", '".$_POST['choice']."', '".$_POST['text']."');")===TRUE){
+						$row = $conn->query("SELECT * FROM ChoiceAnswer WHERE questionId=".$_POST['questionId']." AND choice='".$_POST['choice']."' AND text='".$_POST['text']."';");
 						echo json_encode($row->fetch_assoc());
 					} else {
 						echo '{"err":"Failure Inserting Value!"}';
 					}
 				} else {
-					echo '{"err":"Error! not a valid option for multiple choice problem"}';
+					echo '{"err":"Error! not a valid choice for multiple choice problem"}';
 				}
 			} else {
 				echo '{"err":"Error! text not set"}';
 			}
 		} else {
-			echo '{"err":"Error! option not set"}';
+			echo '{"err":"Error! choice not set"}';
 		}
 	} else {
 		echo '{"err":"Error! questionId not set"}';
@@ -45,7 +45,7 @@ function getQuestionAnswer() {
 	} else {
 		$comma = 0;
 		if (isset($_GET["questionId"])) {
-			if($rows = $conn->query("SELECT * FROM ChoiceAnswer WHERE questionID=".$_GET["format"].";")) {
+			if($rows = $conn->query("SELECT * FROM ChoiceAnswer WHERE questionId=".$_GET["questionId"].";")) {
 				echo "[";
 				while ($row = $rows->fetch_assoc()) {
 					if ($comma > 0) {
