@@ -1,8 +1,8 @@
 <?php
 require_once "sendTo.php";
 require_once "getQuestion.php";
-$Exam_Table_Name_url="";
-$Exam_Question_Table="";
+$Exam_Table_Name_url="https://web.njit.edu/~jap64/backend/exam.php";
+$Exam_Question_Table="https://web.njit.edu/~jap64/backend/examquestion.php";
 if(isJson(file_get_contents('php://input'))){
   $exam=json_decode(file_get_contents('php://input'), true);
 }
@@ -10,21 +10,25 @@ else{
   $exam=$_POST;
 }
 
-echo $exam["1"];
+//echo $exam["1"];
 //can have an exam name or something send to the databsae and get the id back
 //may have to change some of the keys again...
-$Exam_Id = sendTo($Exam_Table_url,$exam);
+//echo
+
+$Exam_Id = sendTo($Exam_Table_Name_url,$exam);
 $Exam_Id = json_decode($Exam_Id,true);
-$Exam_Id = $Exam_ID["id"];
+$Exam_Id = $Exam_Id["examId"];
+
 
 unset($exam["name"]);
 
 //sends 2 values to the table the exam id that we get back from the first sendTo and the questionId.
-foreach($exam as $examquestionId){
+echo json_encode($exam);
+foreach($exam as $examQuestionId){
+  $ExamInfo["examId"]=$Exam_Id;
+  $ExamInfo["questionId"]=$examQuestionId;
 
-  $examQuestionId["ExamId"]=$Exam_Id;
-
-  sendTo($Exam_Question_Table,$examquestionId);
+  sendTo($Exam_Question_Table,$ExamInfo);
 
 }
 
