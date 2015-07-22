@@ -24,7 +24,7 @@ unset($exam["name"]);
 
 //sends 2 values to the table the exam id that we get back from the first sendTo and the questionId.
 echo json_encode($exam);
-foreach($exam as $examQuestionId){
+foreach($exam as $examQuestionId){ 
   $ExamInfo["examId"]=$Exam_Id;
   $ExamInfo["questionId"]=$examQuestionId;
 
