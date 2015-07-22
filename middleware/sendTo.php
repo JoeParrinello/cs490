@@ -24,6 +24,19 @@ $output = curl_exec($ch);
 curl_close($ch);
 return $output;
 }
+
+function curlPut($url,$changeData){
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($changeData)));
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+curl_setopt($ch, CURLOPT_POSTFIELDS,$changeData);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$output  = curl_exec($ch);
+curl_close($ch);
+
+return $output;
+}
 function isJson($string) {
  json_decode($string);
  return (json_last_error() == JSON_ERROR_NONE);
