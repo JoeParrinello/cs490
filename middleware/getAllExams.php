@@ -1,9 +1,11 @@
 <?php
   //sends back all of the name
 require_once "sendTo.php";
-$getExam_url="";
+$getExam_url="https://web.njit.edu/~jap64/backend/exam.php";
 
-$exam = curlGet($url);
+$exam = curlGet($getExam_url);
+echo $exam;
+/*
 $exam = json_decode($exam,true);
 
 foreach($exam as $examidname){
@@ -12,7 +14,7 @@ foreach($exam as $examidname){
 
 
 }
-echo $AllName;
+echo $AllName;*/
 
 //echo $exam["name"];
 
