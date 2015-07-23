@@ -7,17 +7,18 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Testopia | Student Home </title>
+	<title>Testopia | About Our System </title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 		<header>
-			<stong>Testopia | Student Home (CS490) </stong>
+			<stong>Testopia | About our System (CS490) </stong>
 						<?php 
 				echo "UCID: ".$_SESSION['currUser']." | Permissions: ".$_SESSION['currRole'];  
 			 ?>
 		</header>
-						<nav>
+
+			<nav>
 			<label for="show-menu" class="show-menu">Show Menu</label>
 		<input type="checkbox" id="show-menu" role="button" style="opacity:0;">
 		<ul id="menu" align="center">

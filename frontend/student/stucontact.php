@@ -7,12 +7,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Testopia | Student Home </title>
+	<title>Testopia | Contact Us </title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 		<header>
-			<stong>Testopia | Student Home (CS490) </stong>
+			<stong>Testopia | Contact Us  (CS490) </stong>
 						<?php 
 				echo "UCID: ".$_SESSION['currUser']." | Permissions: ".$_SESSION['currRole'];  
 			 ?>

@@ -3,21 +3,20 @@
 	if($_SESSION['currRole'] == "Instructor"){
 		
 ?>
-<!DOCTYPE HTML>
-<php lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Testopia | Instructor Home </title>
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<title>Testopia | View/Invite & Accept Students </title>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 		<header>
-			<stong>Testopia | Instructor Home (CS490) </stong>
+			<stong>Testopia | View/Invite & Accept Students (CS490) </stong>
 			<?php 
 				echo "UCID: ".$_SESSION['currUser']." | Permissions: ".$_SESSION['currRole'];  
 			 ?>
 		</header>
-			<nav>
 		<label for="show-menu" class="show-menu">Show Menu</label>
 		<input type="checkbox" id="show-menu" role="button" style="opacity:0;">
 		<ul id="menu" align="center">
@@ -31,10 +30,8 @@
 					<li><a href="inscontact.php">Contact Us</a> </li>
 					<li><a href="../scripts/logout.php">Logout</a> </li>
 				</ul>
-				</nav>
 			<section>
-				<strong>
-				</strong>
+				<strong>Welcome Instructor,</strong>
 			</section>
 			<footer>
 				<p> System Developed by <em>Joseph Parrinello, Sadig Amini,</em> and <em>Oliver Hanna</em></p>
@@ -47,4 +44,3 @@
 }
 ?>
 </php>
-
