@@ -39,14 +39,23 @@ case "multiple":
 
 
 function prepareMultipleChoice($question,$answerChoices){
+  //  echo $question;
+  //  echo $answerChoices;
   $answerChoices=json_decode($answerChoices,true);
-  foreach( $answerChoices as $choice=>$answer){
+    //$question=json_decode($question,true);
+  //  echo $question;
+
+    foreach( $answerChoices as $choice=>$answer){
+
     $multiplechoice="ans".strtolower($answer["choice"]);
+    //    echo $multiplechoice;
     $question[$multiplechoice]=$answer["text"];
 
   }
+
   $fullanswer = json_encode($question);
-  return $fullanswer;
+  //echo $fullanswer;
+      return $fullanswer;
 
 }
 
@@ -67,29 +76,55 @@ function getAnswerChoicefromDB($ID){
 
   return $question;
 
-
 }
 function getAllQuestionsfromDB(){
   $question_database_url="https://web.njit.edu/~jap64/backend/question.php";
   $allQuestions=curlGet($question_database_url);
   $allQuestions=json_decode($allQuestions,true);
   $count=0;
+
+  echo "[";
   foreach($allQuestions as $question){
+    if($count > 0){
+      echo ",";
+
+    }
     if($question["format"]=="multiple"){
       $answerChoices=getAnswerChoicefromDB($question["id"]);
+      //  echo $answerChoices;
+      //      echo $question;
       $fullanswer=prepareMultipleChoice($question,$answerChoices);
-            $allQuestionsformated[$count] = $fullanswer;
+
+	//echo $fullanswer;
+
+      echo $fullanswer;
+      //      $allQuestionsformated[$count] = $fullanswer;
+
+      foreach($allQuestionsformated as $value){
+	//	echo $value;
+
+	  }
+
+      //      echo json_decode($allQuestionformated,true);
+
     }
-    else{
-      $allQuestionsformated[$count] = $question;
+        else{
+	  echo json_encode($question);
+	  //      $allQuestionsformated[$count] = $question;
     }
 
-
-      $count++;
+          $count++;
   }
+
+  echo "]";
+
+
+    //    echo json_decode($allQuestionsformated);
   //a json json
-  return json_encode($allQuestionsformated);
+  //  return json_encode($allQuestionsformated);
+  //  return ($allQuestionsformated);
 
 }
+
 
 ?>
