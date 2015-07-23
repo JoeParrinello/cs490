@@ -15,7 +15,7 @@ function getExam(){
 				echo "{}";
 			}
 		}
-	} elseif (isset($_GET["id"])){
+	} elseif (isset($_GET["examId"])){
         if ($rows = $conn->query("SELECT * FROM Exams WHERE examId='".$_GET["id"]."';")) {
             if ($row = $rows->fetch_assoc()){
                 echo json_encode($row);
@@ -57,6 +57,24 @@ function makeExam(){
 
 }
 
+function updateExam(){
+	global $conn;
+	global $_PUT;
+	header('Content-Type: application/json');
+	if (isset($_PUT["examId"]) && isset($_PUT["released"])) {
+        if($conn->query("UPDATE Exams SET released=".$_PUT['released']." WHERE examId=".$_PUT['examId'].";")===TRUE){
+            $row = $conn->query("SELECT * FROM Exams WHERE examId=".$_PUT['examId'].";");
+            echo json_encode($row->fetch_assoc());
+		} else {
+			echo '{"err":"Failure Inserting Value!"}';
+		}
+	} else {
+		echo '{"err":"Error!"}';
+	}
+
+
+}
+
 switch ($_SERVER['REQUEST_METHOD']) {
 
 	case 'POST' :
@@ -65,6 +83,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	case 'GET':
 	getExam();
 	break;
+    case 'PUT':
+    parse_str(file_get_contents("php://input"),$_PUT);
+    updateExam();
+    break;
 }
 
 ?>
