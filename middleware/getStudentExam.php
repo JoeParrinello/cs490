@@ -8,9 +8,6 @@ else{
   $Id=$_POST;
 }
 
-//echo $Id["userId"];
-//https://web.njit.edu/~jap64/backend/examanswer.php?userId=7
-
 $getUrl="https://web.njit.edu/~jap64/backend/examanswer.php";
 
 
