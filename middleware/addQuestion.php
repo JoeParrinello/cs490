@@ -1,15 +1,5 @@
 <?php
 require_once 'sendTo.php';
-//getting from html
-//text
-//ansa  if truefalse or short this has answer
-//ansb
-//ansc
-//ansd
-//correctans
-//type
-//points
-
 
 $question_url="https://web.njit.edu/~jap64/backend/question.php";
 $addChoice_url="https://web.njit.edu/~jap64/backend/choiceAnswer.php";
@@ -60,7 +50,6 @@ function sendToChoiceDatabase($variable,$optionLetter,$ID){
   $choice["choice"]=$optionLetter;
   $answerLetter="ans".strtolower($optionLetter);
   $choice["text"] = $variable["$answerLetter"];
-
   $choice["questionId"] = $ID;
   sendTo_NDT($addChoice_url,$choice);
 
