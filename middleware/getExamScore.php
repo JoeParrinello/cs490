@@ -1,13 +1,26 @@
 <?php
 require_once "sendTo.php";
 require_once 'getQuestion.php';
-
+require_once "getStudentIdfromUsername.php";
 if(isJson(file_get_contents('php://input'))){
   $user_examData=json_decode(file_get_contents('php://input'), true);
 }
 else{
   $user_examData=$_POST;
-}
+  }
+
+
+$name = $user_examData["username"];
+/*
+$urlforget="https://web.njit.edu/~jap64/backend/user.php";
+$urlforget=$urlforget."?username=".$name;
+$SID = curlGet($urlforget);
+
+$SID = json_decode($SID,true);
+$user_examData["userId"] = $SID["id"];*/
+$user_examData["userId"] = getStudentIdfromUsername($name);
+
+
 
 $ListofAllStudentAnswers = sendTo("https://web.njit.edu/~sra27/getStudentExam.php",json_encode($user_examData));
 $ListofAllStudentAnswers = json_decode($ListofAllStudentAnswers,true);
@@ -55,7 +68,7 @@ foreach ($ListofAllStudentAnswers as $student_question_id){
 
     //     echo $answer["points"];
 
-  if($student_answer["answer"] == $answer["answer"]){
+    if(strtolower($student_answer["answer"]) == strtolower($answer["answer"])){
 
     $student_score += $answer["points"];
   }
@@ -63,6 +76,8 @@ foreach ($ListofAllStudentAnswers as $student_question_id){
   $Data["questionId"] = $questionId;
   $Data["studentAnswer"] = $student_answer["answer"];
   $Data["correctAnswer"] = $answer["answer"];
+  $Data["text"] = $answer["text"];
+  $Data["format"] = $answer["format"];
   $testjson[$questionId]=json_encode($Data);
   //  echo json_encode($Data);
 
@@ -73,7 +88,7 @@ foreach ($ListofAllStudentAnswers as $student_question_id){
 //echo $student_score;
 $metaData["userId"]=$user_examData["userId"];
 $metaData["examId"]=$user_examData["examId"];
-$metaData["grade"] = $student_score/$exam_total;
+$metaData["grade"] = ($student_score/$exam_total) * 100;
 $metaData=json_encode($metaData);
 $testjson["metaData"]=$metaData;
 $testjson= json_encode($testjson);
