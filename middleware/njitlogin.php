@@ -49,7 +49,8 @@ function njitlogin( $user,$pass ){
 	}
 
 
-$njit_bool=njitlogin($user,$pass);
+//$njit_bool=njitlogin($user,$pass);
+$njit_bool="njit_false";
 
 
 
