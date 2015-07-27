@@ -1,20 +1,20 @@
 <?php
 	session_start();
 	if($_SESSION['currRole'] == "Student"){
-
+		
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Testopia | Student Home </title>
+	<title>Testopia | Contact Us </title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 		<header>
-			<stong>Testopia | Student Home (CS490) </stong>
-						<?php
-				echo "UCID: ".$_SESSION['currUser']." | Permissions: ".$_SESSION['currRole'];
+			<stong>Testopia | Contact Us  (CS490) </stong>
+						<?php 
+				echo "UCID: ".$_SESSION['currUser']." | Permissions: ".$_SESSION['currRole'];  
 			 ?>
 		</header>
 						<nav>
@@ -37,7 +37,7 @@
 			<footer>
 				<p> System Developed by <em>Joseph Parrinello, Sadig Amini,</em> and <em>Oliver Hanna</em></p>
 			</footer>
-
+		
 </body>
 <?php
 } else {

@@ -7,7 +7,7 @@ session_start();
 	$url = "https://web.njit.edu/~sra27/njitlogin.php";
 	session_start();
 	$curlme = curl_init();
-      
+
     $logincred = array('user' => $user,'pass' => $pass );
 
 	$passdata = json_encode($logincred);
@@ -41,16 +41,16 @@ session_start();
 		$loginstate = "bad";
 	}
 
-	/*if ($loginstate == "good"){
-		loginRedirect($user, $role);	
+	if ($loginstate == "good"){
+		loginRedirect($user, $role);
+		$_SESSION['currUser'] = $user;
+		$_SESSION['currRole'] = $role;
 	} else {
 		echo "<br/>Error. Please Try Again.";
 	}
-	*/
+
 }
 
-
-/*
 function loginRedirect($user, $role){
 	if ($role == "Instructor"){
 		header('Location: https://web.njit.edu/~oh7/cs490/frontend/instructor/inshome.php');
@@ -58,6 +58,42 @@ function loginRedirect($user, $role){
 		header('Location: https://web.njit.edu/~oh7/cs490/frontend/student/stuhome.php');
 	}
 }
-*/
+
+function addthis($type, $text, $ansa, $ansb, $ansc, $ansd, $correctans, $points){
+	$type = $_POST['type'];
+	$text = $_POST['text'];
+	$ansa = $_POST['ansa'];
+	$ansb = $_POST['ansb'];
+	$ansc = $_POST['ansc'];
+	$ansd = $_POST['ansd'];
+	$correctans = $_POST['correctans'];
+	$points = $_POST['points'];
+
+	$url = "https://web.njit.edu/~sra27/addQuestion.php";
+	$curlme = curl_init();
+
+   	 $addquestion = array(
+				   "type"=>$type,
+				   "text"=>$text,
+				   "ansa"=>$ansa,
+				   "ansb"=>$ansb,
+				   "ansc"=>$ansc,
+				   "ansd"=>$ansd,
+				   "correctans"=>$correctans,
+				   "points"=> $points
+				   );
+	$addedquestion = json_encode($addquestion);
+
+	curl_setopt($curlme, CURLOPT_URL, $url);
+	curl_setopt($curlme, CURLOPT_CUSTOMERREQUEST, "POST");
+	curl_setopt($curlme, CURLOPT_POSTFIELDS, $addedquestion);
+	curl_setopt($curlme, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curlme, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($addedquestion)));
+
+	$confdata = curl_exec($curlme);
+	curl_close($curlme);
+
+	echo "Question Added to Database.";
+}
 
 ?>
