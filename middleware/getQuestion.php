@@ -39,28 +39,22 @@ case "multiple":
 
 
 function prepareMultipleChoice($question,$answerChoices){
-  //  echo $question;
-  //  echo $answerChoices;
   $answerChoices=json_decode($answerChoices,true);
-    //$question=json_decode($question,true);
-  //  echo $question;
 
-    foreach( $answerChoices as $choice=>$answer){
+  foreach( $answerChoices as $choice=>$answer){
 
     $multiplechoice="ans".strtolower($answer["choice"]);
-    //    echo $multiplechoice;
     $question[$multiplechoice]=$answer["text"];
 
   }
 
   $fullanswer = json_encode($question);
-  //echo $fullanswer;
-      return $fullanswer;
+  return $fullanswer;
 
 }
 
 function getQuestionfromID($ID){
-  //make sure actual database
+
   $question_database_url="https://web.njit.edu/~jap64/backend/question.php";
   $question_database_url=$question_database_url."?id=".$ID;
   $question=curlGet($question_database_url);
@@ -73,7 +67,6 @@ function getAnswerChoicefromDB($ID){
   $question_database_url=$question_database_url."?questionId=".$ID;
   $question=curlGet($question_database_url);
   //a json
-
   return $question;
 
 }
@@ -91,38 +84,21 @@ function getAllQuestionsfromDB(){
     }
     if($question["format"]=="multiple"){
       $answerChoices=getAnswerChoicefromDB($question["id"]);
-      //  echo $answerChoices;
-      //      echo $question;
+
       $fullanswer=prepareMultipleChoice($question,$answerChoices);
 
-	//echo $fullanswer;
-
       echo $fullanswer;
-      //      $allQuestionsformated[$count] = $fullanswer;
-
-      foreach($allQuestionsformated as $value){
-	//	echo $value;
-
-	  }
-
-      //      echo json_decode($allQuestionformated,true);
+    }
+    else{
+      echo json_encode($question);
 
     }
-        else{
-	  echo json_encode($question);
-	  //      $allQuestionsformated[$count] = $question;
-    }
 
-          $count++;
+    $count++;
   }
 
   echo "]";
 
-
-    //    echo json_decode($allQuestionsformated);
-  //a json json
-  //  return json_encode($allQuestionsformated);
-  //  return ($allQuestionsformated);
 
 }
 
