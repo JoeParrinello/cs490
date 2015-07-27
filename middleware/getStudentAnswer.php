@@ -1,5 +1,5 @@
 <?php
-  //need student Id and exam name or exam id
+//need student Id and exam name or exam id
 require_once "sendTo.php";
 if(isJson(file_get_contents('php://input'))){
   $Id=json_decode(file_get_contents('php://input'), true);
