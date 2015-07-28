@@ -41,8 +41,8 @@ function makeExamQuestion(){
 	global $_POST;
 	header('Content-Type: application/json');
 	if (isset($_POST["examId"]) && isset($_POST["questionId"])) {
-        if($conn->query("INSERT INTO ExamQuestions (examId, questionId) VALUES (".$_POST['examId'].", ".$_POST['questionId'].")")===TRUE){
-            $row = $conn->query("SELECT * FROM ExamQuestions WHERE examId=".$_POST['examId']." AND questionId=".$_POST["questionId"].";");
+        if($conn->query("INSERT INTO ExamQuestions (examId, questionId, points) VALUES (".$_POST['examId'].", ".$_POST['questionId'].", ".$_POST['points'].")")===TRUE){
+            $row = $conn->query("SELECT * FROM ExamQuestions WHERE examId=".$_POST['examId']." AND questionId=".$_POST["questionId"]." AND points=".$_POST["points"].";");
             echo json_encode($row->fetch_assoc());
 		} else {
 			echo '{"err":"Failure Inserting Value!"}';

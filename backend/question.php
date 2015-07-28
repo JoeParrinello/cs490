@@ -9,13 +9,13 @@ function makeQuestion(){
 	if (isset($_POST["format"])) {
 		if (isset($_POST["text"])) {
 			if (isset($_POST["answer"])) {
-				if(isset($_POST["points"])){
+				if(isset($_POST["difficulty"])){
 					switch ($_POST["format"]) {
 						case "truefalse":
 						if ($_POST["answer"]=="true" || $_POST["answer"]=="false") {
 							//TODO Check if Quesiton exists in the database before inserting the new question
-							if($conn->query("INSERT INTO Question (format, points, text, answer) VALUES ('".$_POST['format']."', ".$_POST['points'].", '".$_POST['text']."', '".$_POST['answer']."')")===TRUE){
-								$row = $conn->query("SELECT * FROM Question WHERE format='".$_POST['format']."' AND points=".$_POST['points']." AND text='".$_POST['text']."' AND answer='".$_POST['answer']."';");
+							if($conn->query("INSERT INTO Question (format, difficulty, text, answer) VALUES ('".$_POST['format']."', '".$_POST['difficulty']."', '".$_POST['text']."', '".$_POST['answer']."')")===TRUE){
+								$row = $conn->query("SELECT * FROM Question WHERE format='".$_POST['format']."' AND difficulty='".$_POST['difficulty']."' AND text='".$_POST['text']."' AND answer='".$_POST['answer']."';");
 								echo json_encode($row->fetch_assoc());
 							} else {
 								echo '{"err":"Failure Inserting Value!"}';
@@ -26,8 +26,8 @@ function makeQuestion(){
 						break;
 						case "multiple":
 						if ($_POST["answer"]=="A" || $_POST["answer"]=="B" || $_POST["answer"]=="C" || $_POST["answer"]=="D") {
-							if($conn->query("INSERT INTO Question (format, points, text, answer) VALUES ('".$_POST['format']."', ".$_POST['points'].", '".$_POST['text']."', '".$_POST['answer']."')")===TRUE){
-								$row = $conn->query("SELECT * FROM Question WHERE format='".$_POST['format']."' AND points=".$_POST['points']." AND text='".$_POST['text']."' AND answer='".$_POST['answer']."';");
+							if($conn->query("INSERT INTO Question (format, difficulty, text, answer) VALUES ('".$_POST['format']."', '".$_POST['difficulty']."', '".$_POST['text']."', '".$_POST['answer']."')")===TRUE){
+								$row = $conn->query("SELECT * FROM Question WHERE format='".$_POST['format']."' AND difficulty='".$_POST['difficulty']."' AND text='".$_POST['text']."' AND answer='".$_POST['answer']."';");
 								echo json_encode($row->fetch_assoc());
 							} else {
 								echo '{"err":"Failure Inserting Value!"}';
@@ -38,8 +38,8 @@ function makeQuestion(){
 						break;
 						case "short":
 						if ($_POST["answer"]!="") {
-							if($conn->query("INSERT INTO Question (format, points, text, answer) VALUES ('".$_POST['format']."', ".$_POST['points'].", '".$_POST['text']."', '".$_POST['answer']."')")===TRUE){
-								$row = $conn->query("SELECT * FROM Question WHERE format='".$_POST['format']."' AND points=".$_POST['points']." AND text='".$_POST['text']."' AND answer='".$_POST['answer']."';");
+							if($conn->query("INSERT INTO Question (format, difficulty, text, answer) VALUES ('".$_POST['format']."', '".$_POST['difficulty']."', '".$_POST['text']."', '".$_POST['answer']."')")===TRUE){
+								$row = $conn->query("SELECT * FROM Question WHERE format='".$_POST['format']."' AND difficulty='".$_POST['difficulty']."' AND text='".$_POST['text']."' AND answer='".$_POST['answer']."';");
 								echo json_encode($row->fetch_assoc());
 							} else {
 								echo '{"err":"Failure Inserting Value!"}';
@@ -53,7 +53,7 @@ function makeQuestion(){
 						break;
 					}
 				} else {
-					echo '{"err":"Error! points not set"}';
+					echo '{"err":"Error! difficulty not set"}';
 				}
 			} else {
 				echo '{"err":"Error! answer not set"}';
