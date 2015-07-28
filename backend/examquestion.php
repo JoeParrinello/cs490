@@ -7,8 +7,21 @@ function getExamQuestion(){
 	global $conn;
 	global $_GET;
 	header('Content-Type: application/json');
-	if (isset($_GET["examId"])) {
+	if (isset($_GET["examId"]) && isset($_GET["questionId"])) {
         $comma = 0;
+		if($rows = $conn->query("SELECT * FROM ExamQuestions WHERE examId=".$_GET["examId"]." AND questionId=".$_GET["questionId"].";")) {
+			echo "[";
+			while ($row = $rows->fetch_assoc()) {
+				if ($comma > 0) {
+					echo ",";
+				}
+				$comma++;
+				echo json_encode($row);
+			}
+			echo "]";
+		}
+    } elseif (isset($_GET["examId"])) {
+        	$comma = 0;
 		if($rows = $conn->query("SELECT * FROM ExamQuestions WHERE examId=".$_GET["examId"].";")) {
 			echo "[";
 			while ($row = $rows->fetch_assoc()) {
