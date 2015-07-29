@@ -93,6 +93,18 @@ function getQuestion() {
 				}
 				echo "]";
 			}
+		} elseif (isset($_GET["difficulty"])) {
+			if($rows = $conn->query("SELECT * FROM Question WHERE difficulty='".$_GET["difficulty"]."';")) {
+				echo "[";
+				while ($row = $rows->fetch_assoc()) {
+					if ($comma > 0) {
+						echo ",";
+					}
+					$comma++;
+					echo json_encode($row);
+				}
+				echo "]";
+			}
 		} else {
 			if($rows = $conn->query("SELECT * FROM Question;")) {
 				echo "[";
