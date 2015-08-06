@@ -1,8 +1,6 @@
 
 <?php
 require_once 'sendTo.php';
-  //change to actual database
-//$database_url="https://web.njit.edu/~sra27/test.php";
 $database_url="https://web.njit.edu/~jap64/backend/user.php";
 
 if($_SERVER["CONTENT_TYPE"]=="application/json"){
@@ -52,12 +50,6 @@ function njitlogin( $user,$pass ){
 //$njit_bool=njitlogin($user,$pass);
 $njit_bool="njit_false";
 
-
-
-//$database_bool=sendTo($database_url,array("user"=>$user,
-//			   "hashpass"=>$hashpass
-//			   )
-//     );
 
 $database_url=$database_url."?username=".$user;
 
