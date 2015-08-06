@@ -11,14 +11,6 @@ else{
 
 
 $name = $userData["username"];
-/*
-$urlforget="https://web.njit.edu/~jap64/backend/user.php";
-$urlforget=$urlforget."?username=".$name;
-$SID = curlGet($urlforget);
-//echo $SID;
-$SID = json_decode($SID,true);
-$userData["userId"] = $SID["id"];
-*/
 
 $userData["userId"] = getStudentIdfromUsername($name);
 
@@ -29,10 +21,7 @@ $count=0;
 echo "[";
 
 foreach($AllofTheExams as $exam){
-  //  if($exam["released"]=="1"){
-  //    $exam["status"]="released";
-  //  }
-  //  else{
+
     $userData["examId"]=$exam["examId"];
 
     $ListofCorresponding = json_decode(sendTo("https://web.njit.edu/~sra27/getStudentExam.php", json_encode($userData)),true);
@@ -43,7 +32,7 @@ foreach($AllofTheExams as $exam){
       $exam["status"]="taken";
 
     }
-    //  }
+  
   if($count > 0){
     echo ",";
 
