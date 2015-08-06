@@ -13,14 +13,6 @@ $name = $exam["username"];
 unset($exam["username"]);
 
 
-/*
-$urlforget="https://web.njit.edu/~jap64/backend/user.php";
-
-$urlforget=$urlforget."?username=".$name;
-$SID = curlGet($urlforget);
-$SID = json_decode($SID,true);
-
-$SID = $SID["id"];*/
 $SID = getStudentIdfromUsername($name);
 
 $ExamID = $exam["examId"];
