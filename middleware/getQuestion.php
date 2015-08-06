@@ -70,8 +70,20 @@ function getAnswerChoicefromDB($ID){
   return $question;
 
 }
-function getAllQuestionsfromDB(){
-  $question_database_url="https://web.njit.edu/~jap64/backend/question.php";
+function getAllQuestionsfromDB($difficulty){
+  if($difficulty == "Easy"){
+    $question_database_url="https://web.njit.edu/~jap64/backend/question.php?difficulty=Easy";
+  }
+  elseif($difficulty == "Medium"){
+    $question_database_url="https://web.njit.edu/~jap64/backend/question.php?difficulty=Medium";
+  }
+  elseif($difficulty == "Hard"){
+    $question_database_url="https://web.njit.edu/~jap64/backend/question.php?difficulty=Hard";
+  }
+  else {
+    $question_database_url="https://web.njit.edu/~jap64/backend/question.php";
+  }
+
   $allQuestions=curlGet($question_database_url);
   $allQuestions=json_decode($allQuestions,true);
   $count=0;
