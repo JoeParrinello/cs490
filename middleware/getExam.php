@@ -12,16 +12,6 @@ else{
   $variable=$_POST;
 }
 
-/*
-$nameofexam = $variable["name"];
-
-$UrlofGetExam = $Exam_Table_Name_url."?name=".$nameofexam;
-$examId = curlGet($UrlofGetExam);
-$examId = json_decode($examId,true);
-$examId = $examId["examId"];
-*/
-//now that we have examId we can go to the exam question table and query it
-
 $examId = $variable["examId"];
 
 $UrlofGetExamQuestions = $Exam_Question_Table."?examId=".$examId;
@@ -41,8 +31,6 @@ foreach( $exam as $examQuestionId  ){
 }
 
 echo json_encode($FullExam);
-
-
 
 
 ?>
